@@ -1,0 +1,52 @@
+CREATE TABLE tb_abrigo (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	nome VARCHAR(255) NOT NULL,
+	localizacao VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE tb_cargo_usuario (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	cargo VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE tb_usuario (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	login VARCHAR(255) NOT NULL,
+	senha VARCHAR(255) NOT NULL,
+	id_cargo INTEGER NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (id_cargo) REFERENCES tb_cargo_usuario(id)
+);
+
+CREATE TABLE tb_natureza_crise (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	natureza VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE tb_crise (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	descricao VARCHAR(255) NOT NULL,
+	id_natureza_crise INTEGER NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (id_natureza_crise) REFERENCES tb_natureza_crise(id)
+);
+
+CREATE TABLE tb_recurso (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	nome_recurso VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE tb_recurso_abrigo (
+	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+	id_abrigo INTEGER NOT NULL,
+	id_recurso INTEGER NOT NULL,
+	quantidade INTEGER NOT NULL,
+	unidade_medida VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (id_abrigo) REFERENCES tb_abrigo(id),
+	FOREIGN KEY (id_recurso) REFERENCES tb_recurso(id)
+);

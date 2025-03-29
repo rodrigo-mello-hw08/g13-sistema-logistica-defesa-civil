@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+    database:
+      container_name: mysqldb
+      image: mysql:5.7
+      environment:
+        - MYSQL_DATABASE=defesa-civil
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_ROOT=root
+      command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+      ports:
+          - '3307:3306'
+      volumes:
+        - "logi-def-civil-database-volume:/var/lib/mysql"
+        # - "./banco-de-dados/script-criacao.sql:/docker-entrypoint-initdb.d/1.sql"
+        #- "./banco-de-dados/script-inserts.sql:/docker-entrypoint-initdb.d/2.sql"
+      networks:
+        - logi-def-civil-bridge
+      healthcheck:
+        test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+        timeout: 20s
+        retries: 10
+
+volumes:
+  logi-def-civil-database-volume:
+
+networks:
+  logi-def-civil-bridge:
+    driver: bridge
