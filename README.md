@@ -1,13 +1,13 @@
-# Sistema de gestão logística para Defesa Civil
+# Grupo 13 - Sistema de gestão logística para Defesa Civil
 ## Informações
-- Integrantes Grupo 13: Alisson Grings, Augusto Wink, Pedro Haubert, Rodrigo Mello
+- Integrantes do grupo: Alisson Grings, Augusto Wink, Pedro Haubert, Rodrigo Mello
 - Disciplina: Engenharia de Software: Fundamentos
 - Professor: Flavio Moreira de Oliveira
 
 ## Estrutura
 - [Banco de dados](https://github.com/rodrigo-mello-hw08/g13-sistema-logistica-defesa-civil/tree/main/banco-de-dados)
 - [Backend](https://github.com/rodrigo-mello-hw08/g13-sistema-logistica-defesa-civil/tree/main/backend)
-- [Frontend](https://github.com/rodrigo-mello-hw08/g13-sistema-logistica-defesa-civil/tree/main/fronted)
+- [Frontend](https://github.com/rodrigo-mello-hw08/g13-sistema-logistica-defesa-civil/tree/main/frontend)
 
 ## Desafio / Tema
 A Defesa Civil enfrenta desafios significativos na coordenação e gestão de recursos
