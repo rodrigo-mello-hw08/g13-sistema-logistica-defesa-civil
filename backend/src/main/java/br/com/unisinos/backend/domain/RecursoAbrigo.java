@@ -1,16 +1,26 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Table(name = "tb_recurso_abrigo")
 @Entity
 public class RecursoAbrigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_abrigo", nullable = false)
+    private Abrigo abrigo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_recurso", nullable = false)
+    private Recurso recurso;
+
+    private Integer quantidade;
+
+    @Column(name = "unidade_medida")
+    private String unidadeMedida;
 }

@@ -61,9 +61,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Erro'
   /abrigo/{idAbrigo}:
-    post:
-      summary: Adiciona recurso a um abrigo
-      operationId: detalheAbrigo
+    get:
+      summary: Detalhar abrigo com recursos
+      operationId: detalharAbrigo
       tags:
         - Abrigos
       parameters:
@@ -72,7 +72,39 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
+            format: int32
+      responses:
+        '200':
+          description: Detalhes do abrigo retornados com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetalhesAbrigoResponse'
+        '404':
+          description: Abrigo não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+  /abrigo/{idAbrigo}/recurso:
+    post:
+      summary: Adiciona recurso a um abrigo
+      operationId: cadastrarRecursoAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - name: idAbrigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
       requestBody:
         required: true
         content:
@@ -153,7 +185,7 @@ components:
       properties:
         id:
           type: integer
-          format: int64
+          format: int32
           example: 1
         nome:
           type: string
@@ -173,36 +205,41 @@ components:
       required:
         - nome
         - localizacao
+    DetalhesAbrigoResponse:
+      allOf:
+        - $ref: '#/components/schemas/AbrigoResponse'
+        - type: object
+          properties:
+            recursos:
+              type: array
+              items:
+                $ref: '#/components/schemas/RecursoDetalhadoResponse'
     AbrigoRecursoRequest:
       type: object
       properties:
-        idAbrigo:
-          type: integer
-          format: int64
-          example: 1
         idRecurso:
           type: integer
-          format: int64
+          format: int32
           example: 10
         quantidade:
           type: number
           format: double
           example: 25.5
-        unidadeDeMedida:
+        unidadeMedida:
           type: string
           example: "litros"
       required:
         - idAbrigo
         - idRecurso
         - quantidade
-        - unidadeDeMedida
+        - unidadeMedida
 
     RecursoResponse:
       type: object
       properties:
         id:
           type: integer
-          format: int64
+          format: int32
           example: 10
         nome:
           type: string
@@ -218,6 +255,18 @@ components:
           example: "Cobertor"
       required:
         - nome
+    RecursoDetalhadoResponse:
+      allOf:
+        - $ref: '#/components/schemas/RecursoResponse'
+        - type: object
+          properties:
+            quantidade:
+              type: number
+              format: double
+              example: 30.5
+            unidadeDeMedida:
+              type: string
+              example: "litros"
 
     Erro:
       type: object

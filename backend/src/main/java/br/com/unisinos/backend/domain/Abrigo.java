@@ -1,11 +1,12 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 @Table(name = "tb_abrigo")
 @Entity
 public class Abrigo {
@@ -13,6 +14,11 @@ public class Abrigo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
     private String nome;
+
     private String localizacao;
+
+    @OneToMany(mappedBy = "abrigo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<RecursoAbrigo> recursos = new ArrayList<>();
 }

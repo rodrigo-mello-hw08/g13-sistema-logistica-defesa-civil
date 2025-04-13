@@ -61,7 +61,19 @@
 					"name": "listar-recursos-abrigo",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/abrigo/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -70,8 +82,27 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idRecurso\": 3,\r\n  \"quantidade\": 3,\r\n  \"unidadeMedida\": \"Unidade\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8080/abrigo/1/recurso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo",
+								"1",
+								"recurso"
+							]
 						}
 					},
 					"response": []
@@ -85,7 +116,18 @@
 					"name": "listar-recursos",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurso"
+							]
+						}
 					},
 					"response": []
 				},
@@ -96,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"arroz\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Cobertor\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
