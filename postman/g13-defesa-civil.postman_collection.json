@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "be0e601d-06cf-41aa-946b-63924f96223e",
+		"name": "g13-defesa-civil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13364808",
+		"_collection_link": "https://orange-zodiac-520069.postman.co/workspace/projetos-pessoais~5b7595d5-53a0-4c0b-9dbe-3917af406a9e/collection/13364808-be0e601d-06cf-41aa-946b-63924f96223e?action=share&source=collection_link&creator=13364808"
+	},
+	"item": [
+		{
+			"name": "abrigo",
+			"item": [
+				{
+					"name": "listar-abrigos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/abrigo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
