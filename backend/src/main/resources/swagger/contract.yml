@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: G13 Sistema Logistica Defesa Civil
+  description: Trabalho da cadeira de sistemas digitais
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+tags:
+  - name: Abrigos
+    description: Conjunto de operações envolvendo abrigos
+  - name: Recursos
+    description: Conjunto de operações envolvendo conta
+paths:
+  /abrigo:
+    get:
+      tags:
+        - Abrigos
+      summary: Listagem de abrigos cadastrados
+      description: Listagem de abrigos cadastrados
+      operationId: listarAbrigos
+      responses:
+        '200':
+          description: Lista de abrigos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AbrigoResponse'
+        '500':
+          description: Erro interno do servidor
+    post:
+      summary: Cadastra um novo abrigo
+      operationId: cadastrarAbrigo
+      tags:
+        - Abrigos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbrigoRequest'
+      responses:
+        '201':
+          description: Abrigo criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbrigoResponse'
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+  /recurso:
+    get:
+      summary: Lista todos os recursos
+      operationId: listarRecursos
+      tags:
+        - Recursos
+      responses:
+        '200':
+          description: Lista de recursos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecursoResponse'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+    post:
+      summary: Cadastra um novo recurso
+      operationId: cadastrarRecurso
+      tags:
+        - Recursos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecursoRequest'
+      responses:
+        '201':
+          description: Recurso criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecursoResponse'
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+
+components:
+  schemas:
+    AbrigoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        nome:
+          type: string
+          example: "Abrigo Esperança"
+        localizacao:
+          type: string
+          example: "Rua das Flores, 123 - São Paulo/SP"
+    AbrigoRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Abrigo Esperança"
+        localizacao:
+          type: string
+          example: "Rua das Flores, 123 - São Paulo/SP"
+      required:
+        - nome
+        - localizacao
+
+    RecursoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        nome:
+          type: string
+          example: "Cobertor"
+      required:
+        - id
+        - nome
+    RecursoRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Cobertor"
+      required:
+        - nome
+
+    Erro:
+      type: object
+      properties:
+        codigo:
+          type: string
+          example: "500"
+        mensagem:
+          type: string
+          example: "Ocorreu um erro ao processar a solicitação"
+      required:
+        - codigo
+        - mensagem
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

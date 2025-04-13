@@ -1,9 +1,9 @@
 package br.com.unisinos.backend.mapper;
 
-import br.com.unisinos.backend.controller.request.AbrigoRequest;
-import br.com.unisinos.backend.controller.response.AbrigoResponse;
 import br.com.unisinos.backend.domain.Abrigo;
 import org.modelmapper.ModelMapper;
+import org.openapitools.model.AbrigoRequest;
+import org.openapitools.model.AbrigoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
