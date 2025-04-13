@@ -10,7 +10,7 @@ tags:
   - name: Abrigos
     description: Conjunto de operações envolvendo abrigos
   - name: Recursos
-    description: Conjunto de operações envolvendo conta
+    description: Conjunto de operações envolvendo recursos
 paths:
   /abrigo:
     get:
@@ -60,9 +60,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Erro'
+  /abrigo/{idAbrigo}:
+    post:
+      summary: Adiciona recurso a um abrigo
+      operationId: detalheAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - name: idAbrigo
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbrigoRecursoRequest'
+      responses:
+        '204':
+          description: Processado com sucesso
+        '400':
+          description: Requisição inválida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
   /recurso:
     get:
-      summary: Lista todos os recursos
+      summary: Listagem dos recursos cadastrados
       operationId: listarRecursos
       tags:
         - Recursos
@@ -139,6 +173,29 @@ components:
       required:
         - nome
         - localizacao
+    AbrigoRecursoRequest:
+      type: object
+      properties:
+        idAbrigo:
+          type: integer
+          format: int64
+          example: 1
+        idRecurso:
+          type: integer
+          format: int64
+          example: 10
+        quantidade:
+          type: number
+          format: double
+          example: 25.5
+        unidadeDeMedida:
+          type: string
+          example: "litros"
+      required:
+        - idAbrigo
+        - idRecurso
+        - quantidade
+        - unidadeDeMedida
 
     RecursoResponse:
       type: object
