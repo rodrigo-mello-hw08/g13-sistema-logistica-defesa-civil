@@ -9,26 +9,18 @@ import br.com.unisinos.backend.repository.AbrigoRepository;
 import br.com.unisinos.backend.repository.RecursoAbrigoRepository;
 import br.com.unisinos.backend.validator.AbrigoServiceValidator;
 import br.com.unisinos.backend.validator.RecursoServiceValidator;
+import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AbrigoRecursoRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CadastrarRecursoAbrigoService {
 
-    @Autowired
     private AbrigoServiceValidator abrigoValidator;
-
-    @Autowired
     private RecursoServiceValidator recursoValidator;
-
-    @Autowired
     private AbrigoRepository abrigoRepository;
-
-    @Autowired
     private RecursoAbrigoRepository recursoAbrigoRepository;
-
-    @Autowired
     private RecursoAbrigoMapper mapper;
 
     public void cadastrar(Integer idAbrigo, AbrigoRecursoRequest request) throws RegistroNaoEncontradoException {
