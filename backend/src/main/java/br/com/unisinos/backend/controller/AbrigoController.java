@@ -1,6 +1,7 @@
 package br.com.unisinos.backend.controller;
 
 import br.com.unisinos.backend.service.abrigo.CadastrarRecursoAbrigoService;
+import lombok.extern.slf4j.Slf4j;
 import org.openapitools.api.AbrigoApi;
 import br.com.unisinos.backend.service.abrigo.CadastrarAbrigoService;
 import br.com.unisinos.backend.service.abrigo.ListarAbrigosService;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class AbrigoController implements AbrigoApi {
 
     @Autowired
@@ -49,7 +51,7 @@ public class AbrigoController implements AbrigoApi {
             cadastrarRecursoAbrigoService.cadastrar(idAbrigo, abrigoRecursoRequest);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -60,7 +62,7 @@ public class AbrigoController implements AbrigoApi {
             DetalhesAbrigoResponse body = detalharAbrigoService.detalhar(idAbrigo);
             return new ResponseEntity<>(body, HttpStatus.OK);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
