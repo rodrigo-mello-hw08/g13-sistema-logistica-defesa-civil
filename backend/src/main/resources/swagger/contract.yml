@@ -64,12 +64,7 @@ paths:
       tags:
         - Abrigos
       parameters:
-        - name: idAbrigo
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+        - $ref: '#/components/parameters/idAbrigo'
       responses:
         '200':
           description: Detalhes do abrigo retornados com sucesso
@@ -89,12 +84,7 @@ paths:
       tags:
         - Abrigos
       parameters:
-        - name: idAbrigo
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+        - $ref: '#/components/parameters/idAbrigo'
       requestBody:
         required: true
         content:
@@ -231,6 +221,14 @@ paths:
           $ref: '#/components/responses/500'
 
 components:
+  parameters:
+    idAbrigo:
+      name: idAbrigo
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
   schemas:
     AbrigoResponse:
       type: object
@@ -371,7 +369,7 @@ components:
           $ref: '#/components/schemas/NaturezaNotificacaoResponse'
       required:
         - id
-        - nome
+        - descricao
         - natureza_notificacao
     Erro:
       type: object
