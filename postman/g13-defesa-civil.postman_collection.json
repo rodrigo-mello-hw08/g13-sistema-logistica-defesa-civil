@@ -160,6 +160,110 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "natureza_notificacao",
+			"item": [
+				{
+					"name": "listar naturezas notificacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/natureza-notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"natureza-notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar natureza notificacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"natureza\": \"acidente natural\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/natureza-notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"natureza-notificacao"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notificacao",
+			"item": [
+				{
+					"name": "listar notificacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar notificacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Deslizamento em encosta\",\r\n  \"descricao\": \"Deslizamento na encosta da BR-116\",\r\n  \"id_natureza_notificacao\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notificacao"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
