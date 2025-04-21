@@ -1,14 +1,17 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Table(name = "tb_recurso")
 @Entity
+@ToString(exclude = {"abrigos"})
+@EqualsAndHashCode(exclude = {"abrigos"})
 public class Recurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

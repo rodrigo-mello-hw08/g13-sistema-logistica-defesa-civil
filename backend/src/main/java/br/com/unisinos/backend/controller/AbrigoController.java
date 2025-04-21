@@ -1,10 +1,10 @@
 package br.com.unisinos.backend.controller;
 
-import br.com.unisinos.backend.service.abrigo.CadastrarRecursoAbrigo;
+import br.com.unisinos.backend.service.abrigo.CadastrarRecursoAbrigoService;
 import org.openapitools.api.AbrigoApi;
 import br.com.unisinos.backend.service.abrigo.CadastrarAbrigoService;
 import br.com.unisinos.backend.service.abrigo.ListarAbrigosService;
-import br.com.unisinos.backend.service.abrigo.ListarDetalhesAbrigoService;
+import br.com.unisinos.backend.service.abrigo.DetalharAbrigoService;
 import org.openapitools.model.AbrigoRecursoRequest;
 import org.openapitools.model.AbrigoRequest;
 import org.openapitools.model.AbrigoResponse;
@@ -27,10 +27,10 @@ public class AbrigoController implements AbrigoApi {
     private CadastrarAbrigoService cadastrarAbrigoService;
 
     @Autowired
-    private CadastrarRecursoAbrigo cadastrarRecursoAbrigoService;
+    private CadastrarRecursoAbrigoService cadastrarRecursoAbrigoService;
 
     @Autowired
-    private ListarDetalhesAbrigoService listarDetalhesAbrigoService;
+    private DetalharAbrigoService detalharAbrigoService;
 
     @Override
     public ResponseEntity<List<AbrigoResponse>> listarAbrigos() {
@@ -57,7 +57,7 @@ public class AbrigoController implements AbrigoApi {
     @Override
     public ResponseEntity<DetalhesAbrigoResponse> detalharAbrigo(Integer idAbrigo) {
         try {
-            DetalhesAbrigoResponse body = listarDetalhesAbrigoService.detalhar(idAbrigo);
+            DetalhesAbrigoResponse body = detalharAbrigoService.detalhar(idAbrigo);
             return new ResponseEntity<>(body, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

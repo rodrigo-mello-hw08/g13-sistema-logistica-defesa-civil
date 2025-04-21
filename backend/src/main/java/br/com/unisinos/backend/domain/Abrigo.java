@@ -1,14 +1,17 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Table(name = "tb_abrigo")
 @Entity
+@ToString(exclude = {"detalhesRecursos", "listaDeRecursos"})
+@EqualsAndHashCode(exclude = {"detalhesRecursos", "listaDeRecursos"})
 public class Abrigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +23,12 @@ public class Abrigo {
     private String localizacao;
 
     @OneToMany(mappedBy = "abrigo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<RecursoAbrigo> recursos = new ArrayList<>();
+    private List<RecursoAbrigo> detalhesRecursos = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "tb_recurso_abrigo",
+        joinColumns = @JoinColumn(name = "id_abrigo"),
+        inverseJoinColumns = @JoinColumn(name = "id_recurso"))
+    private List<Recurso> listaDeRecursos;
 }

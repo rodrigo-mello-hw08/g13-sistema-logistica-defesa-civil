@@ -27,6 +27,7 @@ public class RecursoMapper {
         RecursoDetalhadoResponse recurso = modelMapper.map(recursoAbrigo, RecursoDetalhadoResponse.class);
         recurso.setId(recursoAbrigo.getRecurso().getId());
         recurso.setNome(recursoAbrigo.getRecurso().getNome());
+        recurso.setUnidadeDeMedida(recursoAbrigo.getUnidadeMedida());
         return recurso;
     }
 }
