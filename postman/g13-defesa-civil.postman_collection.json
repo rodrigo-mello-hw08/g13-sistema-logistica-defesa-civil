@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "be0e601d-06cf-41aa-946b-63924f96223e",
+		"name": "g13-defesa-civil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13364808",
+		"_collection_link": "https://orange-zodiac-520069.postman.co/workspace/projetos-pessoais~5b7595d5-53a0-4c0b-9dbe-3917af406a9e/collection/13364808-be0e601d-06cf-41aa-946b-63924f96223e?action=share&source=collection_link&creator=13364808"
+	},
+	"item": [
+		{
+			"name": "abrigo",
+			"item": [
+				{
+					"name": "listar-abrigos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/abrigo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar-abrigo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Abrigo da Luz 3\",\r\n    \"localizacao\": \"Av. Unisinos, 500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/abrigo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar-recursos-abrigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/abrigo/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adicionar-recurso-abrigo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idRecurso\": 3,\r\n  \"quantidade\": 3,\r\n  \"unidadeMedida\": \"Unidade\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/abrigo/1/recurso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"abrigo",
+								"1",
+								"recurso"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recurso",
+			"item": [
+				{
+					"name": "listar-recursos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar-recurso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Cobertor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recurso",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurso"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "natureza_notificacao",
+			"item": [
+				{
+					"name": "listar naturezas notificacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/natureza-notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"natureza-notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar natureza notificacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"natureza\": \"acidente natural\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/natureza-notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"natureza-notificacao"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notificacao",
+			"item": [
+				{
+					"name": "listar notificacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrar notificacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Deslizamento em encosta\",\r\n  \"descricao\": \"Deslizamento na encosta da BR-116\",\r\n  \"id_natureza_notificacao\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/notificacao",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notificacao"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

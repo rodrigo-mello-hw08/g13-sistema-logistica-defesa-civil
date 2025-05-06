@@ -1,0 +1,412 @@
+openapi: 3.0.3
+info:
+  title: G13 Sistema Logistica Defesa Civil
+  description: Trabalho da cadeira de sistemas digitais
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+tags:
+  - name: Abrigos
+    description: Conjunto de operações envolvendo abrigos
+  - name: Recursos
+    description: Conjunto de operações envolvendo recursos
+  - name: NaturezaNotificacao
+    description: Conjunto de operações envolvendo natureza das notificações
+  - name: Notificacao
+    description: Conjunto de operações envolvendo notificações
+paths:
+  /abrigo:
+    get:
+      tags:
+        - Abrigos
+      summary: Listagem de abrigos cadastrados
+      description: Listagem de abrigos cadastrados
+      operationId: listarAbrigos
+      responses:
+        '200':
+          description: Lista de abrigos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AbrigoResponse'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Cadastra um novo abrigo
+      operationId: cadastrarAbrigo
+      tags:
+        - Abrigos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbrigoRequest'
+      responses:
+        '201':
+          description: Abrigo criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbrigoResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /abrigo/{idAbrigo}:
+    get:
+      summary: Detalhar abrigo com recursos
+      operationId: detalharAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - $ref: '#/components/parameters/idAbrigo'
+      responses:
+        '200':
+          description: Detalhes do abrigo retornados com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetalhesAbrigoResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /abrigo/{idAbrigo}/recurso:
+    post:
+      summary: Adiciona recurso a um abrigo
+      operationId: cadastrarRecursoAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - $ref: '#/components/parameters/idAbrigo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbrigoRecursoRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /recurso:
+    get:
+      summary: Listagem dos recursos cadastrados
+      operationId: listarRecursos
+      tags:
+        - Recursos
+      responses:
+        '200':
+          description: Lista de recursos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecursoResponse'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Cadastra um novo recurso
+      operationId: cadastrarRecurso
+      tags:
+        - Recursos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecursoRequest'
+      responses:
+        '201':
+          description: Recurso criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecursoResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /natureza-notificacao:
+    get:
+      summary: Lista as naturezas de notificação cadastradas
+      operationId: listarNaturezasNotificacao
+      tags:
+        - NaturezaNotificacao
+      responses:
+        '200':
+          description: Lista de naturezas retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NaturezaNotificacaoResponse'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Cadastra uma nova natureza de notificação
+      operationId: cadastrarNaturezaNotificacao
+      tags:
+        - NaturezaNotificacao
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NaturezaNotificacaoRequest'
+      responses:
+        '201':
+          description: Natureza cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NaturezaNotificacaoResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /notificacao:
+    post:
+      summary: Cadastra uma nova notificação
+      operationId: cadastrarNotificacao
+      tags:
+        - Notificacao
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacaoRequest'
+      responses:
+        '201':
+          description: Notificação cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificacaoResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+    get:
+      summary: Lista as notificações cadastradas
+      operationId: listarNotificacoes
+      tags:
+        - Notificacao
+      responses:
+        '200':
+          description: Lista de notificações retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificacaoResponse'
+        '500':
+          $ref: '#/components/responses/500'
+
+components:
+  parameters:
+    idAbrigo:
+      name: idAbrigo
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+  schemas:
+    AbrigoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        nome:
+          type: string
+          example: "Abrigo Esperança"
+        localizacao:
+          type: string
+          example: "Rua das Flores, 123 - São Paulo/SP"
+    AbrigoRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Abrigo Esperança"
+        localizacao:
+          type: string
+          example: "Rua das Flores, 123 - São Paulo/SP"
+      required:
+        - nome
+        - localizacao
+    DetalhesAbrigoResponse:
+      allOf:
+        - $ref: '#/components/schemas/AbrigoResponse'
+        - type: object
+          properties:
+            recursos:
+              type: array
+              items:
+                $ref: '#/components/schemas/RecursoDetalhadoResponse'
+    AbrigoRecursoRequest:
+      type: object
+      properties:
+        idRecurso:
+          type: integer
+          format: int32
+          example: 10
+        quantidade:
+          type: number
+          format: double
+          example: 25.5
+        unidadeMedida:
+          type: string
+          example: "litros"
+      required:
+        - idAbrigo
+        - idRecurso
+        - quantidade
+        - unidadeMedida
+
+    RecursoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 10
+        nome:
+          type: string
+          example: "Cobertor"
+      required:
+        - id
+        - nome
+    RecursoRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Cobertor"
+      required:
+        - nome
+    RecursoDetalhadoResponse:
+      allOf:
+        - $ref: '#/components/schemas/RecursoResponse'
+        - type: object
+          properties:
+            quantidade:
+              type: number
+              format: double
+              example: 30.5
+            unidadeDeMedida:
+              type: string
+              example: "litros"
+    NaturezaNotificacaoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        natureza:
+          type: string
+          example: "Alagamento"
+      required:
+        - id
+        - natureza
+    NaturezaNotificacaoRequest:
+      type: object
+      properties:
+        natureza:
+          type: string
+          example: "Alagamento"
+      required:
+        - natureza
+    NotificacaoRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Deslizamento em encosta"
+        descricao:
+          type: string
+          example: "Deslizamento na encosta da BR-118"
+        id_natureza_notificacao:
+          type: integer
+          format: int32
+          example: 1
+      required:
+        - nome
+        - id_natureza_notificacao
+        - descricao
+    NotificacaoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 100
+        descricao:
+          type: string
+          example: "Inundação do Guaíba"
+        natureza_notificacao:
+          $ref: '#/components/schemas/NaturezaNotificacaoResponse'
+      required:
+        - id
+        - descricao
+        - natureza_notificacao
+    Erro:
+      type: object
+      properties:
+        codigo:
+          type: string
+          example: "500"
+        mensagem:
+          type: string
+          example: "Ocorreu um erro ao processar a solicitação"
+      required:
+        - codigo
+        - mensagem
+
+  responses:
+    '400':
+      description: Requisição inválida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erro'
+    '404':
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erro'
+    '500':
+      description: Erro interno do servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erro'
+    '204':
+      description: Processado com sucesso
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
