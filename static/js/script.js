@@ -16,3 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+function redirecionarAbrigo() {
+    window.location.href = "informacoes_abrigo.html";
+    return false;
+}
