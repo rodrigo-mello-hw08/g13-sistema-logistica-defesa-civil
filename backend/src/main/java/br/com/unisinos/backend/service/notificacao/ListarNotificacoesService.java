@@ -7,7 +7,6 @@ import org.openapitools.model.NotificacaoResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +19,6 @@ public class ListarNotificacoesService {
         return respository.findAll()
             .stream()
             .map(mapper::toResponse)
-            .collect(Collectors.toList());
+            .toList();
     }
 }

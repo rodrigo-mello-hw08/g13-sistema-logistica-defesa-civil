@@ -110,6 +110,45 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
+  /usuario/cargo:
+    post:
+      tags:
+        - Usuarios
+      summary: Cadastra um novo cargo de usuário
+      operationId: cadastrarCargoUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUsuarioRequest'
+      responses:
+        '201':
+          description: Cargo cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUsuarioResponse'
+        '400':
+          $ref: '#/components/responses/400'
+
+    get:
+      tags:
+        - Usuarios
+      summary: Lista todos os cargos cadastrados
+      operationId: listarCargosUsuario
+      responses:
+        '200':
+          description: Lista de cargos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CargoUsuarioResponse'
+        '500':
+          $ref: '#/components/responses/500'
+
   /abrigo/{idAbrigo}:
     get:
       summary: Detalhar abrigo com recursos
@@ -303,15 +342,42 @@ components:
         token:
           type: string
           example: "jwt_token_123"
+        expira_em:
+          type: integer
+          format: int64
+          example: 3000
       required:
         - token
+        - expira_em
+
+    CargoUsuarioRequest:
+      type: object
+      properties:
+        cargo:
+          type: string
+          example: "Voluntario"
+      required:
+        - cargo
+    CargoUsuarioResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        cargo:
+          type: string
+          example: "Voluntario"
+      required:
+        - id
+        - cargo
 
     CadastroUsuarioRequest:
       type: object
       properties:
         cpf:
           type: string
-          example: "123.456.789-00"
+          example: "12345678900"
         nome:
           type: string
           example: "João da Silva"
@@ -326,11 +392,15 @@ components:
           type: string
           format: password
           example: "senha123"
+        id_cargo:
+          type: integer
+          example: 1
       required:
         - cpf
         - nome
         - email
         - senha
+        - id_cargo
 
     UsuarioResponse:
       type: object
@@ -346,10 +416,14 @@ components:
           type: string
           format: email
           example: "usuario@exemplo.com"
+        cargo:
+          type: string
+          example: "Voluntario"
       required:
         - id
         - nome
         - email
+        - cargo
 
     AbrigoResponse:
       type: object

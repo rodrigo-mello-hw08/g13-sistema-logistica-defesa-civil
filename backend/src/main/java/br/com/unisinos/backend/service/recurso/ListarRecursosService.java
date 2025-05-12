@@ -8,7 +8,6 @@ import org.openapitools.model.RecursoResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +20,6 @@ public class ListarRecursosService {
         List<Recurso> recursos = repository.findAll();
         return recursos.stream()
             .map(mapper::toResponse)
-            .collect(Collectors.toList());
+            .toList();
     }
 }

@@ -14,12 +14,13 @@ public class Usuario {
     @Column(name = "id")
     private Integer id;
 
-    private String login;
+    private String email;
 
     private String senha;
 
-    //    private Cargo cargo;
-    //Todo: implementar cargo
+    @ManyToOne
+    @JoinColumn(name = "id_cargo")
+    private Cargo cargo;
 
     private String nome;
 

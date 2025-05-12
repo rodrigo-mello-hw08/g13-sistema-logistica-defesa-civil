@@ -46,12 +46,15 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests(authorize -> authorize
 //                        .requestMatchers("/*/**/publico").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/usuario/login").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/adventurer").permitAll()
                         .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(Customizer.withDefaults()))
+
+                .formLogin(form -> form.loginPage("/usuario/login").loginProcessingUrl("/usuario/login").permitAll())
+                .logout(form -> form.logoutUrl("/usuario/logout").permitAll())
                 .build();
     }
 
