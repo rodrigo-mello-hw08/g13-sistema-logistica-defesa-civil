@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cpf\": \"04230972022\",\r\n    \"nome\": \"Rodrigo Mello\",\r\n    \"endereco\": \"Rua das Flores, 123\",\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"senha\": \"12345678\",\r\n    \"id_cargo\": 1\r\n}",
+							"raw": "{\r\n    \"cpf\": \"04530972029\",\r\n    \"nome\": \"Alisson\",\r\n    \"endereco\": \"Rua das Flores, 123\",\r\n    \"email\": \"alisson@gmail.com\",\r\n    \"senha\": \"1234\",\r\n    \"id_cargo\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,14 +40,14 @@
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "login membro defesa",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"var body = pm.response.json()\r",
-									"pm.collectionVariables.set(\"token\", body.accessToken)"
+									"pm.collectionVariables.set(\"token\", body.token)"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -59,7 +59,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"rodrigo@gmail.com\",\r\n    \"senha\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"alisson@gmail.com\",\r\n    \"senha\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,14 +67,54 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/usuario/login",
+							"raw": "http://localhost:8080/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usuario",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login voluntario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json()\r",
+									"pm.collectionVariables.set(\"token\", body.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"rodrigo.mello3@gmail.com\",\r\n    \"senha\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
 								"login"
 							]
 						}
@@ -84,11 +124,21 @@
 				{
 					"name": "cadastrar cargo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cargo\": \"Voluntario\"\r\n}",
+							"raw": "{\r\n    \"cargo\": \"nao deveria\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,6 +188,16 @@
 				{
 					"name": "listar-abrigos",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -157,11 +217,21 @@
 				{
 					"name": "cadastrar-abrigo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Abrigo da Luz 3\",\r\n    \"localizacao\": \"Av. Unisinos, 500\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"Abrigo da Luz 7\",\r\n    \"localizacao\": \"Av. Unisinos, 500\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,6 +255,16 @@
 				{
 					"name": "listar-recursos-abrigo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -205,11 +285,21 @@
 				{
 					"name": "adicionar-recurso-abrigo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idRecurso\": 3,\r\n  \"quantidade\": 3,\r\n  \"unidadeMedida\": \"Unidade\"\r\n}",
+							"raw": "{\r\n  \"idRecurso\": 1,\r\n  \"quantidade\": 10,\r\n  \"unidadeMedida\": \"Unidade\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -259,6 +349,16 @@
 				{
 					"name": "cadastrar-recurso",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {

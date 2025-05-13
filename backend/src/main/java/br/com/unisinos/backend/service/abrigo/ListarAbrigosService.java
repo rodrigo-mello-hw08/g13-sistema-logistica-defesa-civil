@@ -21,6 +21,6 @@ public class ListarAbrigosService {
         List<Abrigo> abrigos = repository.findAll();
         return abrigos.stream()
             .map(mapper::toResponse)
-            .collect(Collectors.toList());
+            .toList();
     }
 }

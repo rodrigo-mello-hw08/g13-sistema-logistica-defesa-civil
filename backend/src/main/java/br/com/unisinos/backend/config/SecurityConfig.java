@@ -14,6 +14,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,22 +47,33 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
-                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/*/**/publico").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuario/cargo").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuario/cadastro").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/abrigo").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/natureza-notificacao").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/notificacao").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(Customizer.withDefaults()))
-
-                .formLogin(form -> form.loginPage("/usuario/login").loginProcessingUrl("/usuario/login").permitAll())
-                .logout(form -> form.logoutUrl("/usuario/logout").permitAll())
+                .authorizeHttpRequests(SecurityConfig::requests)
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                .formLogin(SecurityConfig::formLogin)
+                .logout(SecurityConfig::logout)
                 .build();
+    }
+
+    private static void requests(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorize) {
+        authorize
+            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.GET, "/usuario/cargo").permitAll()
+            .requestMatchers(HttpMethod.POST, "/usuario/cadastro").permitAll()
+            .requestMatchers(HttpMethod.GET, "/abrigo").permitAll()
+            .requestMatchers(HttpMethod.GET, "/natureza-notificacao").permitAll()
+            .requestMatchers(HttpMethod.GET, "/notificacao").permitAll()
+            .requestMatchers(HttpMethod.GET, "/recurso").permitAll()
+            .anyRequest().authenticated();
+    }
+
+    private static void formLogin(FormLoginConfigurer<HttpSecurity> form) {
+        form.loginPage("/usuario/login")
+            .loginProcessingUrl("/usuario/login")
+            .permitAll();
+    }
+
+    private static void logout(LogoutConfigurer<HttpSecurity> form) {
+        form.logoutUrl("/usuario/logout").permitAll();
     }
 
     @Bean
