@@ -31,6 +31,8 @@ public class CadastrarUsuarioService {
         usuario.setCargo(cargo);
 
         usuario = usuarioRepository.save(usuario);
-        return usuarioMapper.toResponse(usuario);
+        UsuarioResponse response = usuarioMapper.toResponse(usuario);
+        response.setCargo(cargo.getCargo());
+        return response;
     }
 }

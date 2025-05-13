@@ -1,0 +1,55 @@
+package br.com.unisinos.backend.interceptor;
+
+import br.com.unisinos.backend.exception.InformacoesIncorretasLoginException;
+import br.com.unisinos.backend.exception.RegistroNaoEncontradoException;
+import br.com.unisinos.backend.exception.UsuarioNaoEncontradoException;
+import br.com.unisinos.backend.exception.UsuarioNaoTemPermissaoException;
+import lombok.extern.slf4j.Slf4j;
+import org.openapitools.model.Erro;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+@ControllerAdvice
+public class ErrorControllerInterceptor {
+
+    @ExceptionHandler
+    public ResponseEntity<Erro> handleException(Exception exception) {
+        log.error("Ocorreu um erro inesperado: " + exception.getMessage(), exception);
+        return buildResponse("Ocorreu um erro inesperado na aplicação", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Erro> handleException(InformacoesIncorretasLoginException exception) {
+        log.error(exception.getMessage(), exception);
+        return buildResponse(exception.getMessage(), exception.getStatus());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Erro> handleException(RegistroNaoEncontradoException exception) {
+        log.error(exception.getMessage(), exception);
+        return buildResponse(exception.getMessage(), exception.getStatus());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Erro> handleException(UsuarioNaoEncontradoException exception) {
+        log.error(exception.getMessage(), exception);
+        return buildResponse(exception.getMessage(), exception.getStatus());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Erro> handleException(UsuarioNaoTemPermissaoException exception) {
+        log.error(exception.getMessage(), exception);
+        return buildResponse(exception.getMessage(), exception.getStatus());
+    }
+
+    private ResponseEntity<Erro> buildResponse(String menssage, HttpStatus httpStatus) {
+        Erro errorResponse = new Erro(String.valueOf(httpStatus.value()), menssage);
+        return new ResponseEntity<>(errorResponse, httpStatus);
+    }
+}

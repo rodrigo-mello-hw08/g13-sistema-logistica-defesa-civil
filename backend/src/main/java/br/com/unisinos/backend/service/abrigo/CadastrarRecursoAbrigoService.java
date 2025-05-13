@@ -9,6 +9,7 @@ import br.com.unisinos.backend.repository.AbrigoRepository;
 import br.com.unisinos.backend.repository.RecursoAbrigoRepository;
 import br.com.unisinos.backend.validator.AbrigoServiceValidator;
 import br.com.unisinos.backend.validator.RecursoServiceValidator;
+import br.com.unisinos.backend.validator.UsuarioServiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.AbrigoRecursoRequest;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CadastrarRecursoAbrigoService {
 
-    private AbrigoServiceValidator abrigoValidator;
-    private RecursoServiceValidator recursoValidator;
-    private AbrigoRepository abrigoRepository;
-    private RecursoAbrigoRepository recursoAbrigoRepository;
-    private RecursoAbrigoMapper mapper;
+    private final UsuarioServiceValidator usuarioServiceValidator;
+    private final AbrigoServiceValidator abrigoValidator;
+    private final RecursoServiceValidator recursoValidator;
+    private final AbrigoRepository abrigoRepository;
+    private final RecursoAbrigoRepository recursoAbrigoRepository;
+    private final RecursoAbrigoMapper mapper;
 
     public void cadastrar(Integer idAbrigo, AbrigoRecursoRequest request) throws RegistroNaoEncontradoException {
+        usuarioServiceValidator.verificarPermissaoMembroDaDefesa();
         RecursoAbrigo recursoAbrigo = mapper.toDomain(request);
         Abrigo abrigo = abrigoValidator.encontrarAbrigo(idAbrigo);
         recursoAbrigo.setAbrigo(abrigo);

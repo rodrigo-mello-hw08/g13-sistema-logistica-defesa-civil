@@ -7,6 +7,7 @@ import br.com.unisinos.backend.validator.UsuarioServiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.LoginRequest;
 import org.openapitools.model.LoginResponse;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -20,6 +21,7 @@ public class LoginService {
 
     private static final long TEMPO_DE_EXPIRACAO = 10000L;
     private final UsuarioServiceValidator usuarioServiceValidator;
+    private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
 
     public LoginResponse logar(LoginRequest loginRequest) throws UsuarioNaoEncontradoException {
@@ -35,9 +37,9 @@ public class LoginService {
         return new LoginResponse(token, TEMPO_DE_EXPIRACAO);
     }
 
-    private static boolean informacoesDiferentes(LoginRequest loginRequest, Usuario usuario) {
+    private boolean informacoesDiferentes(LoginRequest loginRequest, Usuario usuario) {
         return !usuario.getEmail().equals(loginRequest.getEmail())
-                || !usuario.getSenha().equals(loginRequest.getSenha());
+                || !passwordEncoder.matches(loginRequest.getSenha(), usuario.getSenha());
     }
 
     private JwtClaimsSet getJwt(Usuario usuario) {

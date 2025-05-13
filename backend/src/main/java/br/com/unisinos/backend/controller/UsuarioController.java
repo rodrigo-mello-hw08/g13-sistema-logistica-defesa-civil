@@ -9,6 +9,7 @@ import org.openapitools.api.UsuarioApi;
 import org.openapitools.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UsuarioController implements UsuarioApi {
     private final CadastrarCargoUsuarioService cadastrarCargoUsuarioService;
 
     @Override
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUsuario(LoginRequest loginRequest) {
         return ResponseEntity.ok(loginService.logar(loginRequest));
     }
@@ -31,7 +33,8 @@ public class UsuarioController implements UsuarioApi {
     public ResponseEntity<UsuarioResponse> cadastrarUsuario(CadastroUsuarioRequest cadastroUsuarioRequest) {
         UsuarioResponse body = cadastrarUsuarioService.cadastrar(cadastroUsuarioRequest);
         return new ResponseEntity<>(body, HttpStatus.CREATED);
-    }
+    }     //Todo: consertar response do Cargo
+    // validar permissao do mebro da defesa
 
     @Override
     public ResponseEntity<List<CargoUsuarioResponse>> listarCargosUsuario() {

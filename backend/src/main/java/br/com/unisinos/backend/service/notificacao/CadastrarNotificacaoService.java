@@ -6,6 +6,7 @@ import br.com.unisinos.backend.exception.RegistroNaoEncontradoException;
 import br.com.unisinos.backend.mapper.NotificacaoMapper;
 import br.com.unisinos.backend.repository.NotificacaoRespository;
 import br.com.unisinos.backend.validator.NaturezaNotificacaoServiceValidator;
+import br.com.unisinos.backend.validator.UsuarioServiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.model.NotificacaoRequest;
 import org.openapitools.model.NotificacaoResponse;
@@ -18,8 +19,10 @@ public class CadastrarNotificacaoService {
     private final NotificacaoMapper mapper;
     private final NaturezaNotificacaoServiceValidator validator;
     private final NotificacaoRespository respository;
+    private final UsuarioServiceValidator usuarioServiceValidator;
 
     public NotificacaoResponse cadastrar(NotificacaoRequest request) throws RegistroNaoEncontradoException {
+        usuarioServiceValidator.verificarPermissaoMembroDaDefesa();
         Notificacao notificacao = mapper.toDomain(request);
         NaturezaNotificacao naturezaNotificacao = validator.encontrarNaturezaNotificacao(request.getIdNaturezaNotificacao());
         notificacao.setNatureza(naturezaNotificacao);
