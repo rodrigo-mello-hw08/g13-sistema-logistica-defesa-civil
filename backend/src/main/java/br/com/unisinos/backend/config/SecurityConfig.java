@@ -63,6 +63,10 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/natureza-notificacao").permitAll()
             .requestMatchers(HttpMethod.GET, "/notificacao").permitAll()
             .requestMatchers(HttpMethod.GET, "/recurso").permitAll()
+            .requestMatchers(HttpMethod.POST, "/recurso").permitAll()
+            .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
             .anyRequest().authenticated();
     }
 

@@ -1,14 +1,16 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "tb_natureza_notificacao")
 public class NaturezaNotificacao {
     @Id

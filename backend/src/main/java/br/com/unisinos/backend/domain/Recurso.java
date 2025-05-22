@@ -11,6 +11,9 @@ import java.util.List;
 @Table(name = "tb_recurso")
 @Entity
 @ToString(exclude = {"abrigos"})
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @EqualsAndHashCode(exclude = {"abrigos"})
 public class Recurso {
     @Id
