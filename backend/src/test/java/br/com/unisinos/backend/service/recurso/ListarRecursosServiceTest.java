@@ -1,6 +1,5 @@
 package br.com.unisinos.backend.service.recurso;
 
-import br.com.unisinos.backend.domain.Recurso;
 import br.com.unisinos.backend.factory.RecursoFactory;
 import br.com.unisinos.backend.mapper.RecursoMapper;
 import br.com.unisinos.backend.repository.RecursoRepository;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.openapitools.model.RecursoResponse;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static br.com.unisinos.backend.factory.RecursoFactory.*;
@@ -33,14 +31,11 @@ class ListarRecursosServiceTest {
 
     @Test
     void testarListar() {
-        when(repository.findAll()).thenReturn(mockRecursos());
+        when(repository.findAll()).thenReturn(RecursoFactory.listaRecursos());
         when(mapper.toResponse(any())).thenReturn(aguaResponse(), RecursoFactory.cobertorResponse());
 
         List<RecursoResponse> result = teste.listar();
         assertNotNull(result);
     }
 
-    private List<Recurso> mockRecursos() {
-        return Arrays.asList(agua(), cobertor());
-    }
 }

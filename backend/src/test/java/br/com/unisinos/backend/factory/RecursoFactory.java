@@ -4,6 +4,9 @@ import br.com.unisinos.backend.domain.Recurso;
 import lombok.experimental.UtilityClass;
 import org.openapitools.model.RecursoResponse;
 
+import java.util.Arrays;
+import java.util.List;
+
 @UtilityClass
 public class RecursoFactory {
 
@@ -31,5 +34,9 @@ public class RecursoFactory {
         return new RecursoResponse()
             .id(32)
             .nome("Cobertor");
+    }
+
+    public static List<Recurso> listaRecursos() {
+        return Arrays.asList(agua(), cobertor());
     }
 }

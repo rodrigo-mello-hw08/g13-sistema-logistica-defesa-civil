@@ -12,6 +12,9 @@ import java.util.List;
 @Entity
 @ToString(exclude = {"detalhesRecursos", "listaDeRecursos"})
 @EqualsAndHashCode(exclude = {"detalhesRecursos", "listaDeRecursos"})
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Abrigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
