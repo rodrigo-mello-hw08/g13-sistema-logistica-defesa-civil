@@ -23,3 +23,19 @@ O software deve permitir uma comunicação mais rápida e
 precisa, melhorias na alocação de recursos e uma resposta mais eficiente e eficaz às
 emergências, reduzindo assim o impacto dos desastres e garantindo mais qualidade na  
 proteção à população.
+
+## Como executar utilizando docker
+Encerrar qualquer execução prévia
+```yaml
+docker-compose down
+```
+
+Criar uma imagem a partir do backend
+```yaml
+docker-compose build --no-cache
+```
+
+Inicializar containers
+```yaml
+docker-compose up
+```
