@@ -28,8 +28,8 @@ public class DetalharAbrigoService {
         DetalhesAbrigoResponse response = abrigoMapper.toDetalheAbrigo(abrigo);
         List<RecursoDetalhadoResponse> recursos = abrigo.getDetalhesRecursos()
             .stream()
-            .map(r -> recursoMapper.toResponseRecursoDetalhe(r))
-            .collect(Collectors.toList());
+            .map(recursoMapper::toResponseRecursoDetalhe)
+            .toList();
         response.setRecursos(recursos);
         return response;
     }

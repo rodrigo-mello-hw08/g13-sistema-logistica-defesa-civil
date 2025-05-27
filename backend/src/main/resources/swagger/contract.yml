@@ -7,6 +7,8 @@ servers:
   - url: http://localhost:8080
     description: Servidor local
 tags:
+  - name: Usuarios
+    description: Conjunto de operações envolvendo usuários
   - name: Abrigos
     description: Conjunto de operações envolvendo abrigos
   - name: Recursos
@@ -16,6 +18,57 @@ tags:
   - name: Notificacao
     description: Conjunto de operações envolvendo notificações
 paths:
+  /usuario/login:
+    post:
+      tags:
+        - Usuarios
+      summary: Realiza o login de um usuário
+      operationId: loginUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciais inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+
+  /usuario/cadastro:
+    post:
+      tags:
+        - Usuarios
+      summary: Realiza o cadastro de um novo usuário
+      operationId: cadastrarUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroUsuarioRequest'
+      responses:
+        '201':
+          description: Usuário cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '400':
+          description: Dados inválidos para cadastro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
   /abrigo:
     get:
       tags:
@@ -54,6 +107,45 @@ paths:
                 $ref: '#/components/schemas/AbrigoResponse'
         '400':
           $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /usuario/cargo:
+    post:
+      tags:
+        - Usuarios
+      summary: Cadastra um novo cargo de usuário
+      operationId: cadastrarCargoUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUsuarioRequest'
+      responses:
+        '201':
+          description: Cargo cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUsuarioResponse'
+        '400':
+          $ref: '#/components/responses/400'
+
+    get:
+      tags:
+        - Usuarios
+      summary: Lista todos os cargos cadastrados
+      operationId: listarCargosUsuario
+      responses:
+        '200':
+          description: Lista de cargos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CargoUsuarioResponse'
         '500':
           $ref: '#/components/responses/500'
 
@@ -230,6 +322,109 @@ components:
         type: integer
         format: int32
   schemas:
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "usuario@exemplo.com"
+        senha:
+          type: string
+          format: password
+          example: "senha123"
+      required:
+        - email
+        - senha
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "jwt_token_123"
+        expira_em:
+          type: integer
+          format: int64
+          example: 3000
+      required:
+        - token
+        - expira_em
+
+    CargoUsuarioRequest:
+      type: object
+      properties:
+        cargo:
+          type: string
+          example: "Voluntario"
+      required:
+        - cargo
+    CargoUsuarioResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        cargo:
+          type: string
+          example: "Voluntario"
+      required:
+        - id
+        - cargo
+
+    CadastroUsuarioRequest:
+      type: object
+      properties:
+        cpf:
+          type: string
+          example: "12345678900"
+        nome:
+          type: string
+          example: "João da Silva"
+        endereco:
+          type: string
+          example: "Rua das Flores, 123"
+        email:
+          type: string
+          format: email
+          example: "usuario@exemplo.com"
+        senha:
+          type: string
+          format: password
+          example: "senha123"
+        id_cargo:
+          type: integer
+          example: 1
+      required:
+        - cpf
+        - nome
+        - email
+        - senha
+        - id_cargo
+
+    UsuarioResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        nome:
+          type: string
+          example: "João da Silva"
+        email:
+          type: string
+          format: email
+          example: "usuario@exemplo.com"
+        cargo:
+          type: string
+          example: "Voluntario"
+      required:
+        - id
+        - nome
+        - email
+        - cargo
+
     AbrigoResponse:
       type: object
       properties:

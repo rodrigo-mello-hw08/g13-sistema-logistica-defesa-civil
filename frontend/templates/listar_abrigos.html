@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/listaabrigo.css">
+    <title>Lista de Abrigos</title>
+</head>
+<body>
+    <div class="container">
+       
+        <form class="login-container" method="post" onsubmit="return redirecionarAbrigo()">
+            <h2> Abrigos Cadastrados</h2>
+            <label for="tipo-abrigo">Selecione o Abrigo</label>
+            <select id="tipo-abrigo" name="tipo-abrigo">
+            <option value="Abrigo 1">Abrigo 1</option>
+            <option value="Abrigo 2">Abrigo 2</option>
+            </select>
+            <br/>
+            <input class="login-button" type="submit" value="Ver informações">
+            
+        </form>
+    
+    </div>
+    <div class="back-button-container">
+        <a href="javascript:history.back()" class="back-button">Voltar</a>
+    </div>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
