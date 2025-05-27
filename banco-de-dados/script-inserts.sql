@@ -57,7 +57,7 @@ INSERT INTO tb_recurso_abrigo (id_abrigo, id_recurso, quantidade, unidade_medida
 (5, 6, 250, 'peças'),
 (6, 7, 400, 'unidades');
 
-INSERT INTO tb_pessoa (nome, nascimento, cpf) VALUES
+INSERT INTO tb_pessoa (nome, data_nascimento, cpf) VALUES
 ('João da Silva', '1980-01-15', '11111111111'),
 ('Maria Oliveira', '1992-07-23', '22222222222'),
 ('Pedro Santos', '2000-05-10', '33333333333'),

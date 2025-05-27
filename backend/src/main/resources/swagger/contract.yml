@@ -69,6 +69,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Erro'
+  /usuario/cargo:
+    post:
+      tags:
+        - Usuarios
+      summary: Cadastra um novo cargo de usuário
+      operationId: cadastrarCargoUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUsuarioRequest'
+      responses:
+        '201':
+          description: Cargo cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUsuarioResponse'
+        '400':
+          $ref: '#/components/responses/400'
+
+    get:
+      tags:
+        - Usuarios
+      summary: Lista todos os cargos cadastrados
+      operationId: listarCargosUsuario
+      responses:
+        '200':
+          description: Lista de cargos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CargoUsuarioResponse'
+        '500':
+          $ref: '#/components/responses/500'
+
   /abrigo:
     get:
       tags:
@@ -110,44 +149,7 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-  /usuario/cargo:
-    post:
-      tags:
-        - Usuarios
-      summary: Cadastra um novo cargo de usuário
-      operationId: cadastrarCargoUsuario
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CargoUsuarioRequest'
-      responses:
-        '201':
-          description: Cargo cadastrado com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CargoUsuarioResponse'
-        '400':
-          $ref: '#/components/responses/400'
 
-    get:
-      tags:
-        - Usuarios
-      summary: Lista todos os cargos cadastrados
-      operationId: listarCargosUsuario
-      responses:
-        '200':
-          description: Lista de cargos retornada com sucesso
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CargoUsuarioResponse'
-        '500':
-          $ref: '#/components/responses/500'
 
   /abrigo/{idAbrigo}:
     get:
@@ -188,6 +190,76 @@ paths:
           $ref: '#/components/responses/204'
         '400':
           $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /abrigo/{idAbrigo}/pessoa:
+    post:
+      summary: Cadastra uma pessoa em um abrigo
+      operationId: cadastrarPessoaAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - $ref: '#/components/parameters/idAbrigo'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PessoaRequest'
+      responses:
+        '201':
+          description: Pessoa cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PessoaResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+    get:
+      summary: Lista as pessoas de um abrigo
+      operationId: listarPessoasAbrigo
+      tags:
+        - Abrigos
+      parameters:
+        - $ref: '#/components/parameters/idAbrigo'
+      responses:
+        '200':
+          description: Lista de pessoas retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PessoaResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+  /abrigo/pessoa/{idPessoa}:
+    get:
+      summary: Retorna os dados de uma pessoa e os abrigos associados
+      operationId: obterPessoaPorId
+      tags:
+        - Abrigos
+      parameters:
+        - name: idPessoa
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Dados da pessoa retornados com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PessoaDetalhadaResponse'
+        '404':
+          $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
 
@@ -478,6 +550,65 @@ components:
         - idRecurso
         - quantidade
         - unidadeMedida
+
+    PessoaRequest:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "Maria Oliveira"
+        data_nascimento:
+          type: string
+          format: date
+          example: "1990-05-20"
+        cpf:
+          type: string
+          example: "98765432100"
+        endereco:
+          type: string
+          example: "Rua do Sol, 456"
+      required:
+        - nome
+        - data_nascimento
+        - cpf
+        - endereco
+    PessoaResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 1
+        nome:
+          type: string
+          example: "Maria Oliveira"
+        data_nascimento:
+          type: string
+          format: date
+          example: "1990-05-20"
+        cpf:
+          type: string
+          example: "98765432100"
+        endereco:
+          type: string
+          example: "Rua do Sol, 456"
+      required:
+        - id
+        - nome
+        - data_nascimento
+        - cpf
+        - endereco
+    PessoaDetalhadaResponse:
+      allOf:
+        - $ref: '#/components/schemas/PessoaResponse'
+        - type: object
+          properties:
+            idAbrigos:
+              type: array
+              items:
+                type: integer
+                format: int32
+              example: [1, 3, 5]
 
     RecursoResponse:
       type: object
