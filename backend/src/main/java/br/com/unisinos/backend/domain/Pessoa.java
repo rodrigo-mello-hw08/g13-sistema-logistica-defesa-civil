@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_abrigo")
+@Table(name = "tb_pessoa")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,8 +21,9 @@ public class Pessoa {
 
     private String nome;
 
-    private LocalDate data_nascimento;
+    private LocalDate dataNascimento;
 
+    @Column(length = 11, columnDefinition = "CHAR(11)")
     private String cpf;
 
     private String endereco;

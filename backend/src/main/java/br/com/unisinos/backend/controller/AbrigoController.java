@@ -2,6 +2,7 @@ package br.com.unisinos.backend.controller;
 
 import br.com.unisinos.backend.service.abrigo.CadastrarRecursoAbrigoService;
 import br.com.unisinos.backend.service.abrigo.pessoa.CadastrarPessoaAbrigoService;
+import br.com.unisinos.backend.service.abrigo.pessoa.EncontrarPessoaPorIdService;
 import br.com.unisinos.backend.service.abrigo.pessoa.ListarPessoasAbrigoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class AbrigoController implements AbrigoApi {
     private final DetalharAbrigoService detalharAbrigoService;
     private final CadastrarPessoaAbrigoService cadastrarPessoaAbrigoService;
     private final ListarPessoasAbrigoService listarPessoasAbrigoService;
+    private final EncontrarPessoaPorIdService encontrarPessoaPorIdService;
 
     @Override
     public ResponseEntity<List<AbrigoResponse>> listarAbrigos() {
@@ -75,6 +77,6 @@ public class AbrigoController implements AbrigoApi {
 
     @Override
     public ResponseEntity<PessoaDetalhadaResponse> obterPessoaPorId(Integer idPessoa) {
-        return AbrigoApi.super.obterPessoaPorId(idPessoa);
+        return ResponseEntity.ok(encontrarPessoaPorIdService.encontrarPessoa(idPessoa));
     }
 }

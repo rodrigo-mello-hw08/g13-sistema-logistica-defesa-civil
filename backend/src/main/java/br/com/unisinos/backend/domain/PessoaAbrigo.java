@@ -14,10 +14,14 @@ public class PessoaAbrigo {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_pessoa", nullable = false)
+    @JoinColumn(name = "id_abrigo", nullable = false)
     private Abrigo abrigo;
 
     @ManyToOne
-    @JoinColumn(name = "id_abrigo", nullable = false)
+    @JoinColumn(name = "id_pessoa", nullable = false)
     private Pessoa pessoa;
+
+    @Column(length = 1, columnDefinition = "CHAR(1)")
+    @Enumerated(EnumType.STRING)
+    private FlagAtivo flAtivo;
 }

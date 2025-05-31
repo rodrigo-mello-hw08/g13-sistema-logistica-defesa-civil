@@ -26,6 +26,7 @@ public class Usuario {
 
     private String nome;
 
+    @Column(length = 11, columnDefinition = "CHAR(11)")
     private String cpf;
 
     private String endereco;
