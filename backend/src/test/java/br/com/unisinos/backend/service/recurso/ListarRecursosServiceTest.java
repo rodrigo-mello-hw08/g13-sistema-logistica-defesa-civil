@@ -37,5 +37,4 @@ class ListarRecursosServiceTest {
         List<RecursoResponse> result = teste.listar();
         assertNotNull(result);
     }
-
 }

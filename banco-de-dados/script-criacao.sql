@@ -57,8 +57,9 @@ CREATE TABLE tb_recurso_abrigo (
 CREATE TABLE tb_pessoa (
 	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	nome VARCHAR(255) NOT NULL,
-	nascimento DATE NOT NULL,
+	data_nascimento DATE NOT NULL,
 	cpf CHAR(11) NOT NULL UNIQUE,
+	endereco VARCHAR(255),
 	PRIMARY KEY(id)
 );
 

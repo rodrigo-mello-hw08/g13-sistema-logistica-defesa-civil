@@ -1,13 +1,15 @@
 package br.com.unisinos.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tb_notificacao")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Notificacao {
 
     @Id
