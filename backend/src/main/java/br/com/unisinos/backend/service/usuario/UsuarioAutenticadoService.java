@@ -34,12 +34,12 @@ public class UsuarioAutenticadoService {
 
     public Usuario getByEmail() {
         return repository.findByEmail(obterEmail())
-                .orElseThrow(() -> new ResponseStatusException(INTERNAL_SERVER_ERROR, "Usuário não existe ou não está autenticado"));
+            .orElseThrow(() -> new ResponseStatusException(INTERNAL_SERVER_ERROR, "Usuário não existe ou não está autenticado"));
     }
 
     public Usuario getById() {
         return repository.findById(obterId())
-                .orElseThrow(() -> new ResponseStatusException(INTERNAL_SERVER_ERROR, "Usuário não existe ou não está autenticado"));
+            .orElseThrow(() -> new ResponseStatusException(INTERNAL_SERVER_ERROR, "Usuário não existe ou não está autenticado"));
     }
 
 }
