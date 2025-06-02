@@ -67,9 +67,11 @@ CREATE TABLE tb_pessoa_abrigo (
 	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	id_pessoa INTEGER NOT NULL,
 	id_abrigo INTEGER NOT NULL,
+	fl_ativo CHAR(1) DEFAULT "S",
 	PRIMARY KEY(id),
 	FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa(id),
-	FOREIGN KEY (id_abrigo) REFERENCES tb_abrigo(id)
+	FOREIGN KEY (id_abrigo) REFERENCES tb_abrigo(id),
+	CHECK (fl_ativo IN ("S", "N"))
 );
 
 CREATE TABLE tb_chat (

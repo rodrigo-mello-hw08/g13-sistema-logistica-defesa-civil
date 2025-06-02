@@ -13,8 +13,8 @@ services:
           - '3307:3306'
       volumes:
         - "logi-def-civil-database-volume:/var/lib/mysql"
-        # - "./banco-de-dados/script-criacao.sql:/docker-entrypoint-initdb.d/1.sql"
-        #- "./banco-de-dados/script-inserts.sql:/docker-entrypoint-initdb.d/2.sql"
+        - "./banco-de-dados/script-criacao.sql:/docker-entrypoint-initdb.d/1.sql"
+        - "./banco-de-dados/script-inserts.sql:/docker-entrypoint-initdb.d/2.sql"
       networks:
         - logi-def-civil-bridge
       healthcheck:

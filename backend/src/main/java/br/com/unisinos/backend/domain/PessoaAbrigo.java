@@ -23,5 +23,5 @@ public class PessoaAbrigo {
 
     @Column(length = 1, columnDefinition = "CHAR(1)")
     @Enumerated(EnumType.STRING)
-    private FlagAtivo flAtivo;
+    private FlagAtivo flAtivo = FlagAtivo.S;
 }

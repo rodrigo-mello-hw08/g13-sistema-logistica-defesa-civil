@@ -33,8 +33,7 @@ public class UsuarioController implements UsuarioApi {
     public ResponseEntity<UsuarioResponse> cadastrarUsuario(CadastroUsuarioRequest cadastroUsuarioRequest) {
         UsuarioResponse body = cadastrarUsuarioService.cadastrar(cadastroUsuarioRequest);
         return new ResponseEntity<>(body, HttpStatus.CREATED);
-    }     //Todo: consertar response do Cargo
-    // validar permissao do mebro da defesa
+    }
 
     @Override
     public ResponseEntity<List<CargoUsuarioResponse>> listarCargosUsuario() {
