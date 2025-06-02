@@ -60,6 +60,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/usuario/cargo").permitAll()
             .requestMatchers(HttpMethod.POST, "/usuario/cadastro").permitAll()
             .requestMatchers(HttpMethod.GET, "/abrigo").permitAll()
+            .requestMatchers(HttpMethod.GET, "/abrigo/*/pessoa").permitAll()
+            .requestMatchers(HttpMethod.GET, "/abrigo/pessoa/*").permitAll()
             .requestMatchers(HttpMethod.GET, "/natureza-notificacao").permitAll()
             .requestMatchers(HttpMethod.GET, "/notificacao").permitAll()
             .requestMatchers(HttpMethod.GET, "/recurso").permitAll()
