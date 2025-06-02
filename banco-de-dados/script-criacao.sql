@@ -13,7 +13,7 @@ CREATE TABLE tb_cargo_usuario (
 
 CREATE TABLE tb_usuario (
 	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-	login VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
 	senha VARCHAR(255) NOT NULL,
 	id_cargo INTEGER NOT NULL,
 	nome VARCHAR(255) NOT NULL,
@@ -57,8 +57,9 @@ CREATE TABLE tb_recurso_abrigo (
 CREATE TABLE tb_pessoa (
 	id INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
 	nome VARCHAR(255) NOT NULL,
-	nascimento DATE NOT NULL,
+	data_nascimento DATE NOT NULL,
 	cpf CHAR(11) NOT NULL UNIQUE,
+	endereco VARCHAR(255),
 	PRIMARY KEY(id)
 );
 

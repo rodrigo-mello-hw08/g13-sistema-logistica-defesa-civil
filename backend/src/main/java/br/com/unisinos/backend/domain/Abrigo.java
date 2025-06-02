@@ -12,6 +12,9 @@ import java.util.List;
 @Entity
 @ToString(exclude = {"detalhesRecursos", "listaDeRecursos"})
 @EqualsAndHashCode(exclude = {"detalhesRecursos", "listaDeRecursos"})
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Abrigo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +34,11 @@ public class Abrigo {
         joinColumns = @JoinColumn(name = "id_abrigo"),
         inverseJoinColumns = @JoinColumn(name = "id_recurso"))
     private List<Recurso> listaDeRecursos;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "tb_pessoa_abrigo",
+        joinColumns = @JoinColumn(name = "id_abrigo"),
+        inverseJoinColumns = @JoinColumn(name = "id_pessoa"))
+    private List<Pessoa> listaDePessoas;
 }

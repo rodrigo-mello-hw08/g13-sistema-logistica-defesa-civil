@@ -20,6 +20,6 @@ public class ListarNaturezasNotificacaoService {
         return repository.findAll()
             .stream()
             .map(mapper::toResponse)
-            .collect(Collectors.toList());
+            .toList();
     }
 }

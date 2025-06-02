@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/notification.css">
+    <title>Cadastrar Notificação</title>
+</head>
+<body>
+    <div class="container">
+       
+        <form class="login-container" method="post">
+            <h2>Cadastrar Notificação</h2>
+            <label for="tipo-notific">Natureza da Notificação</label>
+            <select id="tipo-notific" name="tipo-notific">
+            <option value="Crise">Crise</option>
+            <option value="Mensagem">Mensagem</option>
+            </select>
+            <br/>
+            Descrição
+            <input class="message" name="message" id="message"/>
+            <br/>
+            <input class="login-button" type="submit" value="Cadastrar Notificação">
+            
+        </form>
+    
+    </div>
+    <div class="back-button-container">
+        <a href="javascript:history.back()" class="back-button">Voltar</a>
+    </div>
+
+    <script src=""></script>
+</body>
+</html>
